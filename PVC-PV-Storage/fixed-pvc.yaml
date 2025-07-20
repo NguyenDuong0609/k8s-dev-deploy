@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: elasticsearch-pvc
+  namespace: logging
+spec:
+  storageClassName: nfs-storage # Sửa thành storageClass có sẵn
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi # Đảm bảo khớp với PV

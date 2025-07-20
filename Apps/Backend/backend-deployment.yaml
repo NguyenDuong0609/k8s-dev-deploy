@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodejs
+  template:
+    metadata:
+      labels:
+        app: nodejs
+    spec:
+      containers:
+      - name: nodejs
+        image: nguyenduong2824/blogs:backend-v1.2
+        ports:
+        - containerPort: 5000
+        env:
+        - name: DB_LOCAL_URI
+          value: mongodb://duong2824:Duong_2824@mongo:27017/ecommerce?authSource=ecommerce
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs
+spec:
+  selector:
+    app: nodejs
+  ports:
+  - port: 5000
+    targetPort: 5000
